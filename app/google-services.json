@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "663107516735",
+    "project_id": "simplegame-4a8bb",
+    "storage_bucket": "simplegame-4a8bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663107516735:android:0af518171b3c30e3e5fb8a",
+        "android_client_info": {
+          "package_name": "com.silin.simplegame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "663107516735-ba9j64f1h90287hbh31km0mb8q7bubhu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsmgWFTRoNnZya3BEA-ptneni7ki70t9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "663107516735-ba9j64f1h90287hbh31km0mb8q7bubhu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

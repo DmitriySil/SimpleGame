@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Simple Game</string>
+    <string name="facebook_app_id">Facebook App ID</string>
+    <string name="StartButton">Start</string>
+    <string name="SettingsButton">Settings</string>
+    <string name="browserButton">Browser</string>
+    <string name="btnBack">Back</string>
+    <string name="radioBtnEasy">Easy</string>
+    <string name="radioBtnMedium">Medium</string>
+    <string name="radioBtnHard">Hard</string>
+    <string name="lvl1">Level 1</string>
+    <string name="btnClose">X</string>
+    <string name="dialog_defeat">Defeat</string>
+    <string name="btnContinue">Continue</string>
+    <string name="dialog_victory">Victory</string>
+
+</resources>
