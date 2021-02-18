@@ -30,16 +30,16 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/btnStart"
+                android:id="@+id/btnContinueGame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/StartButton" />
+                android:text="@string/continue_button" />
 
             <Button
-                android:id="@+id/btnSettings"
+                android:id="@+id/btnNewGame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/SettingsButton" />
+                android:text="@string/new_game_button" />
 
             <Button
                 android:id="@+id/btnBrowser"

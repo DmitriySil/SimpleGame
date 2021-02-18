@@ -7,18 +7,16 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import com.silin.simplegame.characters.Knight;
 
 public class MainActivity extends AppCompatActivity {
     private double backTime;
     private Toast backToast;
+    public static Boolean startNewGame = true;
+    public static String newGame = "NewGame";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,26 +32,29 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);finish();
         }
 
-        Knight.CreateKnight.getKnight().withHealth(150).create();
         SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);
-        SharedPreferences.Editor editor = save.edit();
-        editor.putInt(CreatingCharacter.health,Knight.getKnight().getHealth());
-        editor.apply();
-        String trxth = String.valueOf(save.getInt(CreatingCharacter.health,0));
-        String ttt = String.valueOf(Knight.getKnight().getHealth());
-        TextView ff = (TextView) findViewById(R.id.knightHel);
-        ff.setText(trxth);
-        TextView knig1 = (TextView) findViewById(R.id.knightHel1);
-        knig1.setText(ttt);
+        if (save.contains(newGame)){
+        startNewGame = save.getBoolean(newGame,startNewGame);}
 
 
-        Button btnStart = (Button) findViewById(R.id.btnStart);
-        btnStart.setOnClickListener(v->{
+
+        Button btnContinueGame = (Button) findViewById(R.id.btnContinueGame);
+        if (startNewGame){
+        btnContinueGame.setVisibility(View.GONE);}
+        if (!startNewGame){
+            btnContinueGame.setVisibility(View.VISIBLE);
+        btnContinueGame.setOnClickListener(v->{
             try {
                 Intent intent = new Intent(MainActivity.this,LevelsMap.class);
                 startActivity(intent);finish();
 
             }catch (Exception e){}
+        });}
+
+        Button btnChoiceChar = (Button) findViewById(R.id.btnNewGame);
+        btnChoiceChar.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this,CreatingCharacter.class);
+            startActivity(intent);finish();
         });
 
         Button btnBrowser = (Button) findViewById(R.id.btnBrowser);

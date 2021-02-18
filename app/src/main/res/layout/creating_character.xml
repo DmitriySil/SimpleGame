@@ -1,68 +1,413 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/map_levels" />
+        app:srcCompat="@drawable/dialog_defeat" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/skillPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/close_char_style"
+            android:textColor="@color/white"
+            android:text="@string/skillpoints" />
+
+        <TextView
+            android:id="@+id/valueOfSkillPoints"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/close_char_style"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/levelPlayer1"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/close_char_style"
+            android:textColor="@color/white"
+            android:text="@string/level" />
+
+        <TextView
+            android:id="@+id/valueLevel"
+            android:layout_width="40dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/close_char_style"
+            android:textColor="@color/white" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="30dp"
-        android:gravity="bottom"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgLvl2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
-                android:layout_weight="1"
-                android:src="@drawable/lvl2" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imgLvl1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:src="@drawable/lvl1" />
-
-            <ImageView
-                android:id="@+id/imgLvl3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="90dp"
-                android:layout_weight="1"
-                android:src="@drawable/lvl3" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnBack"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/btnBack" />
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                app:srcCompat="@drawable/knight_img" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/health"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="@string/health_player1" />
+
+            <TextView
+                android:id="@+id/strength"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="@string/strengthplayer1" />
+
+            <TextView
+                android:id="@+id/critChance"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="@string/critc_hance_player1" />
+
+            <TextView
+                android:id="@+id/critDamage"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="@string/crit_damage_player1" />
+
+            <TextView
+                android:id="@+id/accuracy"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="@string/accuracy_player1" />
+
+            <TextView
+                android:id="@+id/dodge"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="@string/dodge_player1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/valOfHealth"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/valOfStrength"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/valOfCritCh"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/valOfCritDm"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/valOfAccuracy"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/valOfDodge"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/healthPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/plus_img"/>
+
+            <ImageView
+                android:id="@+id/strengthPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/plus_img"/>
+
+            <ImageView
+                android:id="@+id/critChancePlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/plus_img"/>
+
+            <ImageView
+                android:id="@+id/critDamagePlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/plus_img"/>
+
+            <ImageView
+                android:id="@+id/accuracyPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/plus_img"/>
+
+            <ImageView
+                android:id="@+id/dodgePlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="3dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/plus_img"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/healthPoint"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/strengthPoint"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/critChancePoint"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/critDamagePoint"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/accuracyPoint"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="0" />
+
+            <TextView
+                android:id="@+id/dodgePoint"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/close_char_style"
+                android:textColor="@color/white"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/healthNeg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="3dp"
+                android:src="@drawable/negative_img" />
+
+            <ImageView
+                android:id="@+id/strengthNeg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="3dp"
+                android:src="@drawable/negative_img" />
+
+            <ImageView
+                android:id="@+id/critChanceNeg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="3dp"
+                android:src="@drawable/negative_img" />
+
+            <ImageView
+                android:id="@+id/critDamageNeg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="3dp"
+                android:src="@drawable/negative_img" />
+
+            <ImageView
+                android:id="@+id/accuracyNeg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="3dp"
+                android:src="@drawable/negative_img" />
+
+            <ImageView
+                android:id="@+id/dodgeNeg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dp"
+                android:padding="3dp"
+                android:src="@drawable/negative_img" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="bottom|end"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/toLevelsMap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="8dp"
+                android:text="@string/btnContinue" />
+        </LinearLayout>
     </LinearLayout>
+
 </RelativeLayout>

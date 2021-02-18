@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Simple Game</string>
     <string name="facebook_app_id">Facebook App ID</string>
-    <string name="StartButton">Start</string>
-    <string name="SettingsButton">Settings</string>
+    <string name="continue_button">Continue</string>
+    <string name="new_game_button">New Game</string>
     <string name="browserButton">Browser</string>
     <string name="btnBack">Back</string>
     <string name="radioBtnEasy">Easy</string>
@@ -13,5 +13,13 @@
     <string name="dialog_defeat">Defeat</string>
     <string name="btnContinue">Continue</string>
     <string name="dialog_victory">Victory</string>
+    <string name="skillpoints">Skill points</string>
+    <string name="health_player1">Health</string>
+    <string name="strengthplayer1">Strength</string>
+    <string name="critc_hance_player1">Crit Chance</string>
+    <string name="crit_damage_player1">Crit Damage</string>
+    <string name="accuracy_player1">Accuracy</string>
+    <string name="dodge_player1">Dodge</string>
+    <string name="level">Level</string>
 
 </resources>

@@ -18,6 +18,7 @@ public class Browser extends AppCompatActivity {
 
     private WebView web;
     private ProgressBar progressBar;
+    String url = "https://www.google.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class Browser extends AppCompatActivity {
         progressBar.setMax(100);
         web = (WebView) findViewById(R.id.webView);
         web.getSettings().setJavaScriptEnabled(true);
-        web.loadUrl("https://www.google.com/");
+        web.loadUrl(url);
         web.setWebViewClient(new WebViewClient());
 
         web.setWebChromeClient(new WebChromeClient(){
@@ -43,7 +44,6 @@ public class Browser extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override

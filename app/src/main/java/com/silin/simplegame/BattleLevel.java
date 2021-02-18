@@ -19,7 +19,7 @@ import com.silin.simplegame.battle.Battle;
 import com.silin.simplegame.characters.Character;
 import com.silin.simplegame.characters.EnemyFactory;
 import com.silin.simplegame.characters.Knight;
-import com.silin.simplegame.characters.Modifiers;
+import com.silin.simplegame.save.Save;
 
 
 public class BattleLevel extends AppCompatActivity {
@@ -39,7 +39,7 @@ public class BattleLevel extends AppCompatActivity {
         EnemyFactory enemy = new EnemyFactory();
 
 
-        Character player2 = enemy.getLvl(LevelsMap.lvl);
+        Character player2 = enemy.getLvl(com.silin.simplegame.LevelsMap.lvl);
 
         ProgressBar healthP1 = (ProgressBar) findViewById(R.id.healthP1);
         healthP1.setMax(player1.getHealth());
@@ -50,7 +50,7 @@ public class BattleLevel extends AppCompatActivity {
         AnimationDrawable animationP1 = (AnimationDrawable) imageViewP1.getBackground();
 
         ImageView imageViewP2 = (ImageView) findViewById(R.id.imgPlayer2);
-        imageViewP2.setBackgroundResource(LevelsMap.drawablePlayer2);
+        imageViewP2.setBackgroundResource(com.silin.simplegame.LevelsMap.drawablePlayer2);
         AnimationDrawable animationP2 = (AnimationDrawable) imageViewP2.getBackground();
 
         Button btnPauseMenu = (Button) findViewById(R.id.btnMenu);
@@ -68,11 +68,25 @@ public class BattleLevel extends AppCompatActivity {
 //сохранение прогресса
             SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);
             SharedPreferences.Editor editor = save.edit();
-            editor.putBoolean("Level", Modifiers.lvl1Finished = true);
-            editor.apply();
-            Knight.CreateKnight.getKnight().withHealth(save.getInt(CreatingCharacter.health,0)).create();
+             if (LevelsMap.lvl1){
+                LevelsMap.imgLvl2.setVisibility(View.VISIBLE);
+                LevelsMap.lvlFinished = 1;
+
+                editor.putInt(LevelsMap.level, LevelsMap.lvlFinished);
+                editor.apply();
+            }
+             if (LevelsMap.lvl2){
+                LevelsMap.imgLvl3.setVisibility(View.VISIBLE);
+                LevelsMap.lvlFinished = 2;
+
+                 editor.putInt(LevelsMap.level, LevelsMap.lvlFinished);
+                 editor.apply();
+
+             }
+
+            Knight.CreateKnight.getKnight().withHealth(save.getInt(Save.health,0)).create();
 //сохранение прогресса
-            Intent intent = new Intent(BattleLevel.this,LevelsMap.class);
+            Intent intent = new Intent(BattleLevel.this, com.silin.simplegame.LevelsMap.class);
             startActivity(intent);finish();
             dialogWin.dismiss();
         });
@@ -83,7 +97,11 @@ public class BattleLevel extends AppCompatActivity {
         dialogDef.setCancelable(false);
         Button btnContinueDef = (Button) dialogDef.findViewById(R.id.btnContinueDef);
         btnContinueDef.setOnClickListener(view -> {
-            Intent intent = new Intent(BattleLevel.this,LevelsMap.class);
+
+            SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);
+            Knight.CreateKnight.getKnight().withHealth(save.getInt(Save.health,0)).create();
+
+            Intent intent = new Intent(BattleLevel.this, com.silin.simplegame.LevelsMap.class);
             startActivity(intent);finish();
             dialogDef.dismiss();
         });
@@ -98,7 +116,7 @@ public class BattleLevel extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         try {
-            Intent intent = new Intent(BattleLevel.this,LevelsMap.class);
+            Intent intent = new Intent(BattleLevel.this, com.silin.simplegame.LevelsMap.class);
             startActivity(intent);finish();
         }catch (Exception e){}
     }

@@ -1,19 +1,16 @@
 package com.silin.simplegame.battle;
 
 import android.app.Dialog;
-import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.content.SharedPreferences;
 
 import com.silin.simplegame.LevelsMap;
 import com.silin.simplegame.R;
 import com.silin.simplegame.characters.Character;
-import com.silin.simplegame.characters.Modifiers;
 
 
 public class Battle {
@@ -55,10 +52,8 @@ public class Battle {
                                ImageButton basicAttack, ImageButton powerAttack, Button btnStart, ProgressBar healthP1, Dialog dialogDef, Dialog dialogWin) throws InterruptedException {
 
         if (player2.getHealth()<=0){
-            if (Modifiers.lvl1){LevelsMap.imgLvl2.setVisibility(View.VISIBLE);Modifiers.lvl1Finished = true;}
-            if (Modifiers.lvl2){LevelsMap.imgLvl3.setVisibility(View.VISIBLE);Modifiers.lvl2Finished = true;}
             animationP2.stop();
-            imageViewP2.setBackgroundResource(LevelsMap.drawablePlayer2Dying);
+            imageViewP2.setBackgroundResource(com.silin.simplegame.LevelsMap.drawablePlayer2Dying);
             animationP2 = (AnimationDrawable)imageViewP2.getBackground();
             animationP2.start();
             dialogWin.show();
@@ -73,8 +68,8 @@ public class Battle {
         player2.attack(player1);
         healthP1.setProgress(player1.getHealth());
         if (player1.getHealth()<=0){
-            if (Modifiers.lvl1 & !Modifiers.lvl1Finished) Modifiers.lvl1 = false;
-            if (Modifiers.lvl2 & !Modifiers.lvl2Finished) Modifiers.lvl2 = false;
+            if (LevelsMap.lvl1 & LevelsMap.lvlFinished < 1) LevelsMap.lvl1 = false;
+            if (LevelsMap.lvl2 & LevelsMap.lvlFinished < 2) LevelsMap.lvl2 = false;
             animationP1.stop();
             imageViewP1.setBackgroundResource(R.drawable.animation_knight_dying);
             animationP1 = (AnimationDrawable)imageViewP1.getBackground();

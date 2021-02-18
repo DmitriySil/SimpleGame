@@ -5,14 +5,14 @@ public class Knight extends Character implements CanAttack{
     private static CreateKnight knight;
 
     private Knight() {
-        this.health = 150;
-        this.armor = 50;
-        this.speed = 150;
-        this.strength = 20;
+        this.health = 100;
+        this.armor = 0;
+        this.speed = 50;
+        this.strength = 10;
         this.skillPoints = 5;
         this.level = 1;
-        this.critChance = 20;
-        this.critDamage = 1.3;
+        this.critChance = 15;
+        this.critDamage = 1.2;
         this.accuracy = 10;
         this.dodge = 10;
         this.powerAttack = 0;
