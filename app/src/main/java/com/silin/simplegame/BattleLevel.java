@@ -33,8 +33,8 @@ public class BattleLevel extends AppCompatActivity {
         setContentView(R.layout.battle_level);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-//singleton сделать todo
-        player1 = Knight.CreateKnight.getKnight().create();
+
+        player1 = Knight.getKnight();
 
         EnemyFactory enemy = new EnemyFactory();
 
@@ -43,6 +43,7 @@ public class BattleLevel extends AppCompatActivity {
 
         ProgressBar healthP1 = (ProgressBar) findViewById(R.id.healthP1);
         healthP1.setMax(player1.getHealth());
+        healthP1.setProgress(player1.getHealth());
 
 
         ImageView imageViewP1 = (ImageView) findViewById(R.id.imgPlayer1);
@@ -65,27 +66,27 @@ public class BattleLevel extends AppCompatActivity {
         dialogWin.setCancelable(false);
         Button btnContinueVic = (Button) dialogWin.findViewById(R.id.btnContinueWin);
         btnContinueVic.setOnClickListener(view -> {
-//сохранение прогресса
+
             SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);
             SharedPreferences.Editor editor = save.edit();
              if (LevelsMap.lvl1){
                 LevelsMap.imgLvl2.setVisibility(View.VISIBLE);
                 LevelsMap.lvlFinished = 1;
-
+//сохранение прогресса
                 editor.putInt(LevelsMap.level, LevelsMap.lvlFinished);
                 editor.apply();
             }
              if (LevelsMap.lvl2){
                 LevelsMap.imgLvl3.setVisibility(View.VISIBLE);
                 LevelsMap.lvlFinished = 2;
-
+//сохранение прогресса
                  editor.putInt(LevelsMap.level, LevelsMap.lvlFinished);
                  editor.apply();
 
              }
+//возвращение здоровья после битвы
+            Knight.getKnight().setHealth(save.getInt(Save.health,0));
 
-            Knight.CreateKnight.getKnight().withHealth(save.getInt(Save.health,0)).create();
-//сохранение прогресса
             Intent intent = new Intent(BattleLevel.this, com.silin.simplegame.LevelsMap.class);
             startActivity(intent);finish();
             dialogWin.dismiss();
@@ -99,7 +100,7 @@ public class BattleLevel extends AppCompatActivity {
         btnContinueDef.setOnClickListener(view -> {
 
             SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);
-            Knight.CreateKnight.getKnight().withHealth(save.getInt(Save.health,0)).create();
+            Knight.getKnight().setHealth(save.getInt(Save.health,0));
 
             Intent intent = new Intent(BattleLevel.this, com.silin.simplegame.LevelsMap.class);
             startActivity(intent);finish();

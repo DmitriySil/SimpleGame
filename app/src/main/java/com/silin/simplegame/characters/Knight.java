@@ -2,7 +2,7 @@ package com.silin.simplegame.characters;
 
 public class Knight extends Character implements CanAttack{
 
-    private static CreateKnight knight;
+   private static Knight knight;
 
     private Knight() {
         this.health = 100;
@@ -18,9 +18,10 @@ public class Knight extends Character implements CanAttack{
         this.powerAttack = 0;
     }
 
-    public static CreateKnight getKnight(){
+    public static Knight getKnight(){
+
         if (knight==null){
-            knight = new CreateKnight();
+            knight = new Knight();
         }
         return knight;
     }
@@ -43,50 +44,4 @@ public class Knight extends Character implements CanAttack{
     }
 
 
-    public static class CreateKnight extends Knight {
-        private Knight knight;
-
-        public CreateKnight() {
-            knight = new Knight();
-        }
-
-        public CreateKnight withHealth(int health) {
-            knight.health = health;
-            return this;
-        }
-
-        public CreateKnight withHArmor(int armor) {
-            knight.armor = armor;
-            return this;
-        }
-
-        public CreateKnight withSpeed(int speed) {
-            knight.speed = speed;
-            return this;
-        }
-
-        public Knight.CreateKnight withStrength(int strength) {
-            knight.strength = strength;
-            return this;
-        }
-
-        public Knight.CreateKnight withSkillPoints(int skillPoints) {
-            knight.skillPoints = skillPoints;
-            return this;
-        }
-
-        public Knight create() {
-            return knight;
-        }
-
-        @Override
-        public void attack(Character enemy) {
-
-        }
-
-        @Override
-        public void powerAttack(Character enemy) {
-
-        }
-    }
 }

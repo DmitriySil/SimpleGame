@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.silin.simplegame.characters.EnemyFactory;
+import com.silin.simplegame.save.Save;
 
 public class LevelsMap extends AppCompatActivity {
     Dialog dialog;
@@ -55,9 +56,9 @@ public class LevelsMap extends AppCompatActivity {
         lvlFinished = save.getInt(level, lvlFinished);}
 //сохранения
 //        Knight.getKnight().withHealth(save.getInt(Save.health,0)).create();
-//        TextView healthKnight = (TextView) findViewById(R.id.healthknight);
-//        String text = String.valueOf(save.getInt(Save.health,0));
-//        healthKnight.setText(text);
+        TextView healthKnight = (TextView) findViewById(R.id.healthknight);
+        String text = String.valueOf(save.getInt(Save.health,0));
+        healthKnight.setText(text);
         //Knight.getKnight().withHealth(save.getInt("Health",0));
 
 

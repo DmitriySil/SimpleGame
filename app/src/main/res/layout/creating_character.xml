@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
@@ -28,13 +29,14 @@
             android:textColor="@color/white"
             android:text="@string/skillpoints" />
 
-        <TextView
+        <EditText
             android:id="@+id/valueOfSkillPoints"
             android:layout_width="40dp"
             android:layout_height="30dp"
-            android:padding="5dp"
             android:layout_margin="5dp"
             android:background="@drawable/close_char_style"
+            android:inputType="number"
+            android:padding="5dp"
             android:textColor="@color/white" />
 
         <TextView
@@ -273,27 +275,30 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+            <EditText
                 android:id="@+id/healthPoint"
                 android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:layout_margin="5dp"
+                android:layout_height="30dp"
                 android:background="@drawable/close_char_style"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="0"
                 android:textColor="@color/white"
-                android:text="0" />
+                tools:text="0" />
 
-            <TextView
+            <EditText
                 android:id="@+id/strengthPoint"
                 android:layout_width="40dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
+                android:layout_height="30dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/close_char_style"
+                android:ems="10"
+                android:gravity="center"
+                android:inputType="number"
+                android:text="0"
                 android:textColor="@color/white"
-                android:text="0" />
+                tools:text="0" />
 
             <TextView
                 android:id="@+id/critChancePoint"

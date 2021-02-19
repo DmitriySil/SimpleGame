@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.silin.simplegame.characters.Knight;
+import com.silin.simplegame.modifiers.LevelUp;
 import com.silin.simplegame.save.Save;
 
 public class CreatingCharacter extends AppCompatActivity {
@@ -35,6 +37,9 @@ public class CreatingCharacter extends AppCompatActivity {
     private TextView healthPoint,strengthPoint,critChancePoint,critDamagePoint,accuracyPoint,dodgePoint;
     private ImageView healthPlus,strengthPlus,critChancePlus,critDamagePlus,accuracyPlus,dodgePlus;
     private ImageView healthNeg,strengthNeg,critChanceNeg,critDamageNeg,accuracyNeg,dodgeNeg;
+    int incHealth = 15,incStrength = 5,incCritChance = 2,incAccuracy = 2,incDodge = 2;
+    double incCritDamage = 0.1;
+    int universalValue = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +57,7 @@ public class CreatingCharacter extends AppCompatActivity {
         btnContinue.setOnClickListener(v -> {
            if (char1.isChecked()){
 
-                Knight.CreateKnight.getKnight().create();
+                Knight.getKnight();
                 SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);
                 Save.save(save);
 //
@@ -71,14 +76,68 @@ public class CreatingCharacter extends AppCompatActivity {
             }
              choice.dismiss();
         });
+        healthPoint = (EditText) findViewById(R.id.healthPoint);
+        strengthPoint = (EditText) findViewById(R.id.strengthPoint);
+
+
+        valueOfSkillPoints = (EditText) findViewById(R.id.valueOfSkillPoints);
+        valueOfSkillPoints.setText(String.valueOf(Knight.getKnight().getSkillPoints()));
+        valueLevel = (TextView) findViewById(R.id.valueLevel);
+        valueLevel.setText(String.valueOf(Knight.getKnight().getLevel()));
+        valOfHealth = (TextView) findViewById(R.id.valOfHealth);
+        valOfHealth.setText(String.valueOf(Knight.getKnight().getHealth()));
+        valOfStrength = (TextView) findViewById(R.id.valOfStrength);
+        valOfStrength.setText(String.valueOf(Knight.getKnight().getStrength()));
+
+        healthPlus = (ImageView) findViewById(R.id.healthPlus);
+        healthPlus.setOnClickListener(v -> {
+            if (Integer.parseInt(valueOfSkillPoints.getText().toString())>0){
+                LevelUp.levelUp(healthPoint,valueOfSkillPoints,valOfHealth,incHealth,universalValue);
+//                universalValue = Integer.parseInt(healthPoint.getText().toString())+1;
+//                healthPoint.setText(String.valueOf(universalValue));
+//                universalValue = Integer.parseInt(valueOfSkillPoints.getText().toString())-1;
+//                valueOfSkillPoints.setText(String.valueOf(universalValue));
+//                universalValue = Integer.parseInt(valOfHealth.getText().toString())+incHealth;
+//                valOfHealth.setText(String.valueOf(universalValue));
+            }
+        });
+        healthNeg = (ImageView) findViewById(R.id.healthNeg);
+        healthNeg.setOnClickListener(v -> {
+            if (Integer.parseInt(healthPoint.getText().toString())>0){
+                LevelUp.levelDown(healthPoint,valueOfSkillPoints,valOfHealth,incHealth,universalValue);
+//                universalValue = Integer.parseInt(healthPoint.getText().toString())-1;
+//                healthPoint.setText(String.valueOf(universalValue));
+//                universalValue = Integer.parseInt(valueOfSkillPoints.getText().toString())+1;
+//                valueOfSkillPoints.setText(String.valueOf(universalValue));
+//                universalValue = Integer.parseInt(valOfHealth.getText().toString())-incHealth;
+//                valOfHealth.setText(String.valueOf(universalValue));
+            }
+        });
+
+        strengthPlus = (ImageView) findViewById(R.id.strengthPlus);
+        strengthPlus.setOnClickListener(v -> {
+            if (Integer.parseInt(valueOfSkillPoints.getText().toString())>0){
+                LevelUp.levelUp(strengthPoint,valueOfSkillPoints,valOfStrength,incStrength,universalValue);
+            }
+        });
+
+        strengthNeg = (ImageView) findViewById(R.id.strengthNeg);
+        strengthNeg.setOnClickListener(v -> {
+            if (Integer.parseInt(strengthPoint.getText().toString())>0) {
+                LevelUp.levelDown(strengthPoint, valueOfSkillPoints, valOfStrength, incStrength, universalValue);
+            }
+        });
 
         toLevelsMap = (Button) findViewById(R.id.toLevelsMap);
         toLevelsMap.setOnClickListener(v -> {
+            Knight.getKnight().setHealth(Integer.parseInt(valOfHealth.getText().toString()));
+
             MainActivity.startNewGame = false;
             SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);
+            Save.save(save);
             SharedPreferences.Editor editor = save.edit();
-            editor.putBoolean(MainActivity.newGame,MainActivity.startNewGame = false);
-            editor.putInt(LevelsMap.level,LevelsMap.lvlFinished = 0);
+            editor.putBoolean(MainActivity.newGame,false);
+            editor.putInt(LevelsMap.level,0);
             editor.apply();
             Intent intent = new Intent(CreatingCharacter.this,LevelsMap.class);
             startActivity(intent);finish();

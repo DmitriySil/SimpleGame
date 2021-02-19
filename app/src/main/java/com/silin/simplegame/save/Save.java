@@ -21,6 +21,7 @@ public class Save {
 
         SharedPreferences.Editor editor = save.edit();
         editor.putInt(health, Knight.getKnight().getHealth());
+        System.out.println(Knight.getKnight().getHealth());
         editor.putInt(armor,Knight.getKnight().getArmor());
         editor.putInt(speed,Knight.getKnight().getSpeed());
         editor.putInt(strength,Knight.getKnight().getStrength());
