@@ -48,17 +48,5 @@
                 android:text="@string/browserButton" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/knightHel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="TextView" />
-        <TextView
-            android:id="@+id/knightHel1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:text="TextView" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
