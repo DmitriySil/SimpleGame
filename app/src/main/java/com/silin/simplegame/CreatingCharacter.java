@@ -59,7 +59,15 @@ public class CreatingCharacter extends AppCompatActivity {
 
                 Knight.getKnight();
                 SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);
-                Save.save(save);
+                Save.originalParam(save);
+                System.out.println("knight " + Knight.getKnight().getHealth());
+
+               valOfHealth = (TextView) findViewById(R.id.valOfHealth);
+               valOfHealth.setText(String.valueOf(Knight.getKnight().getHealth()));
+
+               valOfStrength = (TextView) findViewById(R.id.valOfStrength);
+               valOfStrength.setText(String.valueOf(Knight.getKnight().getStrength()));
+
 //
 //                SharedPreferences.Editor editor = save.edit();
 //                editor.putInt(health,Knight.getKnight().getHealth());
@@ -76,18 +84,17 @@ public class CreatingCharacter extends AppCompatActivity {
             }
              choice.dismiss();
         });
+
         healthPoint = (EditText) findViewById(R.id.healthPoint);
         strengthPoint = (EditText) findViewById(R.id.strengthPoint);
 
-
         valueOfSkillPoints = (EditText) findViewById(R.id.valueOfSkillPoints);
         valueOfSkillPoints.setText(String.valueOf(Knight.getKnight().getSkillPoints()));
+
         valueLevel = (TextView) findViewById(R.id.valueLevel);
         valueLevel.setText(String.valueOf(Knight.getKnight().getLevel()));
-        valOfHealth = (TextView) findViewById(R.id.valOfHealth);
-        valOfHealth.setText(String.valueOf(Knight.getKnight().getHealth()));
-        valOfStrength = (TextView) findViewById(R.id.valOfStrength);
-        valOfStrength.setText(String.valueOf(Knight.getKnight().getStrength()));
+
+
 
         healthPlus = (ImageView) findViewById(R.id.healthPlus);
         healthPlus.setOnClickListener(v -> {
@@ -131,6 +138,7 @@ public class CreatingCharacter extends AppCompatActivity {
         toLevelsMap = (Button) findViewById(R.id.toLevelsMap);
         toLevelsMap.setOnClickListener(v -> {
             Knight.getKnight().setHealth(Integer.parseInt(valOfHealth.getText().toString()));
+            Knight.getKnight().setStrength(Integer.parseInt(valOfStrength.getText().toString()));
 
             MainActivity.startNewGame = false;
             SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);

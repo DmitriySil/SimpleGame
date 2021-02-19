@@ -21,7 +21,6 @@ public class Save {
 
         SharedPreferences.Editor editor = save.edit();
         editor.putInt(health, Knight.getKnight().getHealth());
-        System.out.println(Knight.getKnight().getHealth());
         editor.putInt(armor,Knight.getKnight().getArmor());
         editor.putInt(speed,Knight.getKnight().getSpeed());
         editor.putInt(strength,Knight.getKnight().getStrength());
@@ -32,5 +31,39 @@ public class Save {
         editor.putInt(accuracy,Knight.getKnight().getAccuracy());
         editor.putInt(dodge,Knight.getKnight().getDodge());
         editor.apply();
+    }
+
+    public static void load(SharedPreferences save){
+
+    }
+
+    public static void originalParam(SharedPreferences save){
+        SharedPreferences.Editor editor = save.edit();
+
+        editor.putInt(health, 100);
+        editor.putInt(armor,0);
+        editor.putInt(speed,50);
+        editor.putInt(strength,10);
+        editor.putInt(skillPoints,5);
+        editor.putInt(level,1);
+        editor.putInt(critChance,15);
+        editor.putFloat(critDamage, (float) 1.2);
+        editor.putInt(accuracy,10);
+        editor.putInt(dodge,10);
+        editor.apply();
+
+        Knight.getKnight().setHealth(save.getInt(health,0));
+        System.out.println("hel " + save.getInt(health,0));
+        Knight.getKnight().setArmor(save.getInt(armor,0));
+        Knight.getKnight().setSpeed(save.getInt(speed,0));
+        Knight.getKnight().setStrength( save.getInt(strength,0));
+        Knight.getKnight().setSkillPoints(save.getInt(skillPoints,0));
+        Knight.getKnight().setLevel(save.getInt(level,0));
+        Knight.getKnight().setCritChance(save.getInt(critChance,0));
+        Knight.getKnight().setCritDamage(save.getFloat(critDamage,(float)0));
+        Knight.getKnight().setAccuracy( save.getInt(accuracy,0));
+        Knight.getKnight().setDodge( save.getInt(dodge,0));
+
+        System.out.println("save jop");
     }
 }

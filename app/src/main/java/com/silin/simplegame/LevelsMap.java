@@ -21,6 +21,9 @@ import com.silin.simplegame.save.Save;
 
 public class LevelsMap extends AppCompatActivity {
     Dialog dialog;
+
+    Button btnBack;
+
     public static int lvlFinished = 0,lvl2Finished=0,lvl3Finished=0;
     public static boolean lvl1=false,lvl2=false,lvl3=false;
     public static String level = "Level";
@@ -86,14 +89,14 @@ public class LevelsMap extends AppCompatActivity {
                 RadioGroup difLvl = (RadioGroup) dialog.findViewById(R.id.difLvl);
                 difLvl.setOnCheckedChangeListener((group, id) -> {
                     if (id == R.id.radioBtnEasy){
-                        com.silin.simplegame.LevelsMap.strengthLvl1 = 10;
-                        com.silin.simplegame.LevelsMap.health = 100;}
+                        LevelsMap.strengthLvl1 = 10;
+                        LevelsMap.health = 100;}
                     if (id == R.id.radioBtnMedium){
-                        com.silin.simplegame.LevelsMap.strengthLvl1 = 25;
-                        com.silin.simplegame.LevelsMap.health = 150;}
+                        LevelsMap.strengthLvl1 = 25;
+                        LevelsMap.health = 150;}
                     if (id == R.id.radioBtnHard){
-                        com.silin.simplegame.LevelsMap.strengthLvl1 = 50;
-                        com.silin.simplegame.LevelsMap.health = 250;}
+                        LevelsMap.strengthLvl1 = 50;
+                        LevelsMap.health = 250;}
                 });
 
                 Button btnStart = (Button)dialog.findViewById(R.id.btnContinueGame);
@@ -123,6 +126,12 @@ public class LevelsMap extends AppCompatActivity {
             }catch (Exception e){}
         });
 //конец лвл2
+
+        btnBack = (Button) findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(LevelsMap.this,MainActivity.class);
+            startActivity(intent);finish();
+        });
     }
 
     @Override
