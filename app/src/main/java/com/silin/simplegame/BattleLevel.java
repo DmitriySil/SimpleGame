@@ -1,5 +1,6 @@
 package com.silin.simplegame;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +9,11 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -51,8 +56,25 @@ public class BattleLevel extends AppCompatActivity {
         AnimationDrawable animationP1 = (AnimationDrawable) imageViewP1.getBackground();
 
         ImageView imageViewP2 = (ImageView) findViewById(R.id.imgPlayer2);
-        imageViewP2.setBackgroundResource(com.silin.simplegame.LevelsMap.drawablePlayer2);
+        imageViewP2.setBackgroundResource(LevelsMap.drawablePlayer2);
         AnimationDrawable animationP2 = (AnimationDrawable) imageViewP2.getBackground();
+        System.out.println("bef " +imageViewP2.getX());
+        System.out.println("bef " +imageViewP2.getTop());
+        System.out.println("bef " +imageViewP2.getBottom());
+        imageViewP2.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                System.out.println("aft "+imageViewP2.getX());
+                System.out.println("aft "+imageViewP2.getTop());
+                System.out.println("bott "+imageViewP2.getBottom());
+            }
+        });
+
+        ImageView imgFire = (ImageView) findViewById(R.id.imgFire);
+        Animation fireAnim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.dragon_fire);
+        Animation btnAnim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.btn_attack);
+
+
 
         Button btnPauseMenu = (Button) findViewById(R.id.btnMenu);
         Button btnBattle = (Button) findViewById(R.id.btnStartBattle);
@@ -110,10 +132,46 @@ public class BattleLevel extends AppCompatActivity {
         btnBattle.setOnClickListener(v -> {
             btnBattle.setVisibility(View.INVISIBLE);
 
-        Battle.battle(player1, player2, imageViewP1, imageViewP2, animationP1, animationP2, basicAttack, powerAttack,btnBattle,healthP1, dialogDef, dialogWin);
+        Battle.battle(player1, player2, imageViewP1, imageViewP2, imgFire, animationP1, animationP2, fireAnim, btnAnim, basicAttack, powerAttack,btnBattle,healthP1, dialogDef, dialogWin);
 
         });
     }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
+    }
+
+    private void hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    // Shows the system bars by removing all the flags
+// except for the ones that make the content appear under the system bars.
+    private void showSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+    }
+
     @Override
     public void onBackPressed() {
         try {

@@ -53,6 +53,7 @@ public class LevelsMap extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.levels_map);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 //загрузка сохранения
         SharedPreferences save = getSharedPreferences("Save",MODE_PRIVATE);
         if (save.contains(level)){
@@ -126,12 +127,57 @@ public class LevelsMap extends AppCompatActivity {
             }catch (Exception e){}
         });
 //конец лвл2
+        imgLvl3.setOnClickListener(v->{
+            try {
+                lvl3 = true;
+                lvl = EnemyFactory.Level.LVL3;
+                drawablePlayer2 = R.drawable.animation_dragon_attack;
+                drawablePlayer2Dying = R.drawable.animation_fallen2_dying;
+                Intent intent = new Intent(LevelsMap.this,BattleLevel.class);
+                startActivity(intent);finish();
+            }catch (Exception e){}
+        });
 
         btnBack = (Button) findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> {
             Intent intent = new Intent(LevelsMap.this,MainActivity.class);
             startActivity(intent);finish();
         });
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            hideSystemUI();
+        }
+    }
+
+    private void hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        // Set the content to appear under the system bars so that the
+                        // content doesn't resize when the system bars hide and show.
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        // Hide the nav bar and status bar
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN);
+    }
+
+    // Shows the system bars by removing all the flags
+// except for the ones that make the content appear under the system bars.
+    private void showSystemUI() {
+        View decorView = getWindow().getDecorView();
+        decorView.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
 
     @Override
