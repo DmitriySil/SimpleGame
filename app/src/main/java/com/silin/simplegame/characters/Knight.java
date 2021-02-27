@@ -16,6 +16,7 @@ public class Knight extends Character implements CanAttack{
         this.accuracy = 10;
         this.dodge = 10;
         this.powerAttack = 0;
+        this.experience = 0;
     }
 
     public static Knight getKnight(){

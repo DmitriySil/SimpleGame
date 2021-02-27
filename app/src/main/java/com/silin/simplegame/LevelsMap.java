@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,13 +21,13 @@ import com.silin.simplegame.characters.EnemyFactory;
 import com.silin.simplegame.save.Save;
 
 public class LevelsMap extends AppCompatActivity {
-    Dialog dialog;
+    Dialog difficultyLevel,menu;
 
-    Button btnBack;
+    ImageButton btnBack;
 
     public static int lvlFinished = 0,lvl2Finished=0,lvl3Finished=0;
     public static boolean lvl1=false,lvl2=false,lvl3=false;
-    public static String level = "Level";
+    public static String level = "Finished Level";
 
     static EnemyFactory.Level lvl;
     static int drawablePlayer2;
@@ -56,6 +57,7 @@ public class LevelsMap extends AppCompatActivity {
 
 //загрузка сохранения
         SharedPreferences save = getSharedPreferences("Save",MODE_PRIVATE);
+        Save.load(save);
         if (save.contains(level)){
         lvlFinished = save.getInt(level, lvlFinished);}
 //сохранения
@@ -80,14 +82,14 @@ public class LevelsMap extends AppCompatActivity {
                 lvl1 = true;
                 strengthLvl1 = 10;
                 health = 100;
-                dialog = new Dialog(this);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.setContentView(R.layout.previewd_dialog_lvl1);
-                TextView btnClose = (TextView)dialog.findViewById(R.id.btnClose);
+                difficultyLevel = new Dialog(this);
+                difficultyLevel.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                difficultyLevel.setContentView(R.layout.previewd_dialog_lvl1);
+                TextView btnClose = (TextView) difficultyLevel.findViewById(R.id.btnClose);
                 btnClose.setOnClickListener(view -> {
-                    dialog.dismiss();
+                    difficultyLevel.dismiss();
                 });
-                RadioGroup difLvl = (RadioGroup) dialog.findViewById(R.id.difLvl);
+                RadioGroup difLvl = (RadioGroup) difficultyLevel.findViewById(R.id.difLvl);
                 difLvl.setOnCheckedChangeListener((group, id) -> {
                     if (id == R.id.radioBtnEasy){
                         LevelsMap.strengthLvl1 = 10;
@@ -100,13 +102,13 @@ public class LevelsMap extends AppCompatActivity {
                         LevelsMap.health = 250;}
                 });
 
-                Button btnStart = (Button)dialog.findViewById(R.id.btnContinueGame);
+                Button btnStart = (Button) difficultyLevel.findViewById(R.id.btnContinueGame);
                 btnStart.setOnClickListener(view -> {
                     Intent intent = new Intent(LevelsMap.this,BattleLevel.class);
                     startActivity(intent);finish();
-                    dialog.dismiss();
+                    difficultyLevel.dismiss();
                 });
-                dialog.show();
+                difficultyLevel.show();
                 lvl = EnemyFactory.Level.LVL1;
                 drawablePlayer2 = R.drawable.animation_fallen_attack;
                 drawablePlayer2Dying = R.drawable.animation_fallen1_dying;
@@ -138,11 +140,34 @@ public class LevelsMap extends AppCompatActivity {
             }catch (Exception e){}
         });
 
-        btnBack = (Button) findViewById(R.id.btnBack);
+
+//кнопка меню и настройки
+        btnBack = (ImageButton) findViewById(R.id.btnMenuAndSettings);
         btnBack.setOnClickListener(v -> {
-            Intent intent = new Intent(LevelsMap.this,MainActivity.class);
-            startActivity(intent);finish();
+            menu = new Dialog(this);
+            menu.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            menu.setContentView(R.layout.menu_dialog);
+            menu.setCancelable(false);
+            menu.show();
+            TextView btnDialogClose = (TextView) menu.findViewById(R.id.btnDialogClose);
+            btnDialogClose.setOnClickListener(View ->{
+                menu.dismiss();
+            });
+            Button btnMenu = (Button) menu.findViewById(R.id.btnMainMenu);
+            btnMenu.setOnClickListener(v1 -> {
+                Intent intent = new Intent(LevelsMap.this,MainActivity.class);
+                startActivity(intent);finish();
+            });
+            Button btnCharacter = (Button) menu.findViewById(R.id.btnCharacter);
+            btnCharacter.setOnClickListener(v1 -> {
+                Intent intent = new Intent(LevelsMap.this,CreatingCharacter.class);
+                startActivity(intent);finish();
+                menu.dismiss();
+            });
         });
+
+
+
     }
 
     @Override

@@ -21,5 +21,7 @@
     <string name="accuracy_player1">Accuracy</string>
     <string name="dodge_player1">Dodge</string>
     <string name="level">Level</string>
+    <string name="btn_character">Character</string>
+    <string name="btn_menu">Menu</string>
 
 </resources>

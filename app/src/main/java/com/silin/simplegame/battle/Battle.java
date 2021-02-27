@@ -91,7 +91,7 @@ public class Battle {
         if (LevelsMap.lvl3){
         imgFire.setBackgroundResource(R.drawable.shot_robot);
         //imgFire.startAnimation(fireAnim);
-        int x = (int)imageViewP2.getX()-230;
+        int x = (int)imageViewP2.getX()-250;
         int y = (int)imageViewP2.getBottom()/2;
         TranslateAnimation animFire = new TranslateAnimation(x,25,-y,-5);
         System.out.println();

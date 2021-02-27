@@ -52,8 +52,9 @@ public class MainActivity extends AppCompatActivity {
             }catch (Exception e){}
         });}
 
-        Button btnChoiceChar = (Button) findViewById(R.id.btnNewGame);
-        btnChoiceChar.setOnClickListener(v -> {
+        Button btnNewGame = (Button) findViewById(R.id.btnNewGame);
+        btnNewGame.setOnClickListener(v -> {
+            startNewGame = true;
             Intent intent = new Intent(MainActivity.this,CreatingCharacter.class);
             startActivity(intent);finish();
         });

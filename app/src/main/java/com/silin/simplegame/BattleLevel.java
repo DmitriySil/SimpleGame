@@ -24,6 +24,8 @@ import com.silin.simplegame.battle.Battle;
 import com.silin.simplegame.characters.Character;
 import com.silin.simplegame.characters.EnemyFactory;
 import com.silin.simplegame.characters.Knight;
+import com.silin.simplegame.modifiers.IncreasingExp;
+import com.silin.simplegame.modifiers.LevelUp;
 import com.silin.simplegame.save.Save;
 
 
@@ -44,7 +46,7 @@ public class BattleLevel extends AppCompatActivity {
         EnemyFactory enemy = new EnemyFactory();
 
 
-        Character player2 = enemy.getLvl(com.silin.simplegame.LevelsMap.lvl);
+        Character player2 = enemy.getLvl(LevelsMap.lvl);
 
         ProgressBar healthP1 = (ProgressBar) findViewById(R.id.healthP1);
         healthP1.setMax(player1.getHealth());
@@ -58,15 +60,10 @@ public class BattleLevel extends AppCompatActivity {
         ImageView imageViewP2 = (ImageView) findViewById(R.id.imgPlayer2);
         imageViewP2.setBackgroundResource(LevelsMap.drawablePlayer2);
         AnimationDrawable animationP2 = (AnimationDrawable) imageViewP2.getBackground();
-        System.out.println("bef " +imageViewP2.getX());
-        System.out.println("bef " +imageViewP2.getTop());
-        System.out.println("bef " +imageViewP2.getBottom());
+
         imageViewP2.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                System.out.println("aft "+imageViewP2.getX());
-                System.out.println("aft "+imageViewP2.getTop());
-                System.out.println("bott "+imageViewP2.getBottom());
             }
         });
 
@@ -91,23 +88,35 @@ public class BattleLevel extends AppCompatActivity {
 
             SharedPreferences save = getSharedPreferences("Save", MODE_PRIVATE);
             SharedPreferences.Editor editor = save.edit();
-             if (LevelsMap.lvl1){
+             if (LevelsMap.lvl1 & LevelsMap.lvlFinished<1){
                 LevelsMap.imgLvl2.setVisibility(View.VISIBLE);
                 LevelsMap.lvlFinished = 1;
+                IncreasingExp.increasingExp(player1,LevelsMap.lvlFinished);
 //сохранение прогресса
                 editor.putInt(LevelsMap.level, LevelsMap.lvlFinished);
                 editor.apply();
             }
-             if (LevelsMap.lvl2){
+             if (LevelsMap.lvl2 & LevelsMap.lvlFinished<2){
                 LevelsMap.imgLvl3.setVisibility(View.VISIBLE);
                 LevelsMap.lvlFinished = 2;
+                IncreasingExp.increasingExp(player1,LevelsMap.lvlFinished);
 //сохранение прогресса
                  editor.putInt(LevelsMap.level, LevelsMap.lvlFinished);
                  editor.apply();
-
              }
+            if (LevelsMap.lvl3 & LevelsMap.lvlFinished<3){
+                LevelsMap.imgLvl3.setVisibility(View.VISIBLE);
+                LevelsMap.lvlFinished = 3;
+                IncreasingExp.increasingExp(player1,LevelsMap.lvlFinished);
+//сохранение прогресса
+                editor.putInt(LevelsMap.level, LevelsMap.lvlFinished);
+                editor.apply();
+            }
 //возвращение здоровья после битвы
             Knight.getKnight().setHealth(save.getInt(Save.health,0));
+            LevelsMap.lvl3 = false;LevelsMap.lvl2 = false;LevelsMap.lvl1 = false;
+            LevelUp.levelUp(player1);
+            Save.save(save);
 
             Intent intent = new Intent(BattleLevel.this, com.silin.simplegame.LevelsMap.class);
             startActivity(intent);finish();
