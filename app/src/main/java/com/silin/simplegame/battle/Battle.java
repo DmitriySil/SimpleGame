@@ -77,6 +77,7 @@ public class Battle {
             imageViewP2.setBackgroundResource(com.silin.simplegame.LevelsMap.drawablePlayer2Dying);
             animationP2 = (AnimationDrawable)imageViewP2.getBackground();
             animationP2.start();
+
             dialogWin.show();
 
         }else
@@ -88,7 +89,9 @@ public class Battle {
         animationP2.start();
         player2.attack(player1);
         healthP1.setProgress(player1.getHealth());
-        if (LevelsMap.lvl3){
+
+//Анимация огня дракона
+        if (LevelsMap.lvl4){
         imgFire.setBackgroundResource(R.drawable.shot_robot);
         //imgFire.startAnimation(fireAnim);
         int x = (int)imageViewP2.getX()-250;
@@ -103,19 +106,15 @@ public class Battle {
             public void onAnimationStart(Animation animation) {
 
             }
-
             @Override
             public void onAnimationEnd(Animation animation) {
 
                 imgFire.setBackgroundResource(R.drawable.hit_the_shot);
                 AnimationDrawable animationShot = (AnimationDrawable) imgFire.getBackground();
                 animationShot.start();
-
             }
-
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
         });}
 

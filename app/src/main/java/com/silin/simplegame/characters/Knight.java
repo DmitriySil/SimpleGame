@@ -41,7 +41,7 @@ public class Knight extends Character implements CanAttack{
 
     @Override
     public void powerAttack(Character enemy) {
-            enemy.setHealth(enemy.getHealth() - strength * 3);
+            enemy.setHealth(enemy.getHealth() - strength * 2);
     }
 
 

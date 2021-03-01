@@ -18,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.silin.simplegame.characters.EnemyFactory;
+import com.silin.simplegame.characters.FallenAngel;
 import com.silin.simplegame.save.Save;
 
 public class LevelsMap extends AppCompatActivity {
@@ -25,8 +26,8 @@ public class LevelsMap extends AppCompatActivity {
 
     ImageButton btnBack;
 
-    public static int lvlFinished = 0,lvl2Finished=0,lvl3Finished=0;
-    public static boolean lvl1=false,lvl2=false,lvl3=false;
+    public static int lvlFinished = 0;
+    public static boolean lvl1=false,lvl2=false,lvl3=false,lvl4=false,lvl5=false;
     public static String level = "Finished Level";
 
     static EnemyFactory.Level lvl;
@@ -35,10 +36,10 @@ public class LevelsMap extends AppCompatActivity {
     public static int drawablePlayer2Dying;
     public static int drawablePlayer1Dying;
 
-    public static int health;
+    public static int healthEnemy;
     static int armor;
     static int speed;
-    public static int strengthLvl1;
+    public static int strengthEnemy;
     static int skillPoints;
 
 
@@ -48,6 +49,9 @@ public class LevelsMap extends AppCompatActivity {
     public static ImageView imgLvl2;
     @SuppressLint("StaticFieldLeak")
     public static ImageView imgLvl3;
+    @SuppressLint("StaticFieldLeak")
+    public static ImageView imgLvl4;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,16 +76,19 @@ public class LevelsMap extends AppCompatActivity {
         imgLvl1 = (ImageView) findViewById(R.id.imgLvl1);
         imgLvl2 = (ImageView) findViewById(R.id.imgLvl2);
         imgLvl3 = (ImageView) findViewById(R.id.imgLvl3);
+        imgLvl4 = (ImageView) findViewById(R.id.imgLvl4);
 
         if (lvlFinished < 1){imgLvl2.setVisibility(View.INVISIBLE);}
         if(lvlFinished < 2){imgLvl3.setVisibility(View.INVISIBLE);}
+        if(lvlFinished < 3){imgLvl4.setVisibility(View.INVISIBLE);}
 
-
+// 1й уровень
         imgLvl1.setOnClickListener(v->{
             try {
                 lvl1 = true;
-                strengthLvl1 = 10;
-                health = 100;
+                strengthEnemy = 10;
+                healthEnemy = 100;
+
                 difficultyLevel = new Dialog(this);
                 difficultyLevel.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 difficultyLevel.setContentView(R.layout.previewd_dialog_lvl1);
@@ -92,14 +99,14 @@ public class LevelsMap extends AppCompatActivity {
                 RadioGroup difLvl = (RadioGroup) difficultyLevel.findViewById(R.id.difLvl);
                 difLvl.setOnCheckedChangeListener((group, id) -> {
                     if (id == R.id.radioBtnEasy){
-                        LevelsMap.strengthLvl1 = 10;
-                        LevelsMap.health = 100;}
+                        strengthEnemy = 10;
+                        healthEnemy =100;}
                     if (id == R.id.radioBtnMedium){
-                        LevelsMap.strengthLvl1 = 25;
-                        LevelsMap.health = 150;}
+                        strengthEnemy = 25;
+                        healthEnemy = 150;}
                     if (id == R.id.radioBtnHard){
-                        LevelsMap.strengthLvl1 = 50;
-                        LevelsMap.health = 250;}
+                        strengthEnemy = 50;
+                        healthEnemy = 250;}
                 });
 
                 Button btnStart = (Button) difficultyLevel.findViewById(R.id.btnContinueGame);
@@ -114,12 +121,13 @@ public class LevelsMap extends AppCompatActivity {
                 drawablePlayer2Dying = R.drawable.animation_fallen1_dying;
             }catch (Exception e){}
         });
-//конец лвл1
+
 
 //начало лвл2
-
         imgLvl2.setOnClickListener(v->{
             try {
+                strengthEnemy =15;
+                healthEnemy = 120;
                 lvl2 = true;
                 lvl = EnemyFactory.Level.LVL2;
                 drawablePlayer2 = R.drawable.animation_fallen2_attack;
@@ -128,13 +136,27 @@ public class LevelsMap extends AppCompatActivity {
                 startActivity(intent);finish();
             }catch (Exception e){}
         });
-//конец лвл2
+
+//начало лвл3
         imgLvl3.setOnClickListener(v->{
             try {
+                strengthEnemy =25;
+                healthEnemy = 350;
                 lvl3 = true;
                 lvl = EnemyFactory.Level.LVL3;
+                drawablePlayer2 = R.drawable.animation_fallen_3_attack;
+                drawablePlayer2Dying = R.drawable.animation_fallen_3_dying;
+                Intent intent = new Intent(LevelsMap.this,BattleLevel.class);
+                startActivity(intent);finish();
+            }catch (Exception e){}
+        });
+//начало лвл4
+        imgLvl4.setOnClickListener(v->{
+            try {
+                lvl4 = true;
+                lvl = EnemyFactory.Level.LVL4;
                 drawablePlayer2 = R.drawable.animation_dragon_attack;
-                drawablePlayer2Dying = R.drawable.animation_fallen2_dying;
+                drawablePlayer2Dying = R.drawable.animation_dragon_dying;
                 Intent intent = new Intent(LevelsMap.this,BattleLevel.class);
                 startActivity(intent);finish();
             }catch (Exception e){}

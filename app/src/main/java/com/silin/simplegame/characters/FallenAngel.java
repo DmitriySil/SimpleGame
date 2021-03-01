@@ -34,6 +34,7 @@ public class FallenAngel extends Character {
         enemy.setHealth(enemy.getHealth() - strength * 3);
     }
 
+
     public static class CreateFallen extends Character {
         private  FallenAngel fallenAngel;
 

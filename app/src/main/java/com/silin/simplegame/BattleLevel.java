@@ -105,8 +105,15 @@ public class BattleLevel extends AppCompatActivity {
                  editor.apply();
              }
             if (LevelsMap.lvl3 & LevelsMap.lvlFinished<3){
-                LevelsMap.imgLvl3.setVisibility(View.VISIBLE);
+                LevelsMap.imgLvl4.setVisibility(View.VISIBLE);
                 LevelsMap.lvlFinished = 3;
+                IncreasingExp.increasingExp(player1,LevelsMap.lvlFinished);
+//сохранение прогресса
+                editor.putInt(LevelsMap.level, LevelsMap.lvlFinished);
+                editor.apply();
+            }if (LevelsMap.lvl4 & LevelsMap.lvlFinished<4){
+                LevelsMap.imgLvl3.setVisibility(View.VISIBLE);
+                LevelsMap.lvlFinished = 4;
                 IncreasingExp.increasingExp(player1,LevelsMap.lvlFinished);
 //сохранение прогресса
                 editor.putInt(LevelsMap.level, LevelsMap.lvlFinished);

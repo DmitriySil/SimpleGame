@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         startNewGame = save.getBoolean(newGame,startNewGame);}
 
 
-
+//продолжить
         Button btnContinueGame = (Button) findViewById(R.id.btnContinueGame);
         if (startNewGame){
         btnContinueGame.setVisibility(View.GONE);}
@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
             }catch (Exception e){}
         });}
 
+//новая игра
         Button btnNewGame = (Button) findViewById(R.id.btnNewGame);
         btnNewGame.setOnClickListener(v -> {
             startNewGame = true;

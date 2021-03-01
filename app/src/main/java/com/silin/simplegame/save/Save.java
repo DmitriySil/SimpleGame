@@ -66,7 +66,6 @@ public class Save {
         editor.apply();
 
         Knight.getKnight().setHealth(save.getInt(health,0));
-        System.out.println("hel " + save.getInt(health,0));
         Knight.getKnight().setArmor(save.getInt(armor,0));
         Knight.getKnight().setSpeed(save.getInt(speed,0));
         Knight.getKnight().setStrength( save.getInt(strength,0));
